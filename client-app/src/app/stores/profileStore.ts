@@ -55,7 +55,7 @@ export default class ProfileStore {
         }
     }
 
-    setMainPhoto =async (photo: Photo) => {
+    setMainPhoto = async (photo: Photo) => {
         this.loading = true;
         try {
             await agent.Profiles.setMainPhoto(photo.id);
@@ -74,13 +74,33 @@ export default class ProfileStore {
         }
     }
 
-    deletePhoto =async (photo: Photo) => {
+    deletePhoto = async (photo: Photo) => {
         this.loading = true;
         try {
             await agent.Profiles.deletePhoto(photo.id);
             runInAction(() => {
                 if (this.profile) {
                     this.profile.photos = this.profile.photos?.filter(p => p.id !== photo.id);
+                    this.loading = false;
+                }
+            })
+        } catch (error) {
+            console.log(error);
+            runInAction(() => this.loading = false);
+        }
+    }
+
+    updateProfile = async (profile: Partial<Profile>) => {
+        this.loading = true;
+        try {
+            await agent.Profiles.updateProfile(profile);
+            runInAction(() => {
+                if (this.profile) {
+                    if (profile.displayName && profile.displayName !==
+                        store.userStore.user?.displayName) {
+                        store.userStore.setDisplayName(profile.displayName);
+                    }
+                    this.profile = { ...this.profile, ...profile as Profile };
                     this.loading = false;
                 }
             })
