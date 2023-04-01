@@ -40,7 +40,7 @@ namespace API
             app.UseCsp(opt => opt
                 .BlockAllMixedContent()
                 .StyleSources(s => s.Self()
-                    .CustomSources("https://fonts.googleapis.com", "https://cdn.jsdelivr.net", "sha256-DpOoqibK/BsYhobWHnU38Pyzt5SjDZuR/mFsAiVN7kk="))
+                    .CustomSources("https://fonts.googleapis.com", "https://cdn.jsdelivr.net", "sha256-DpOoqibK/BsYhobWHnU38Pyzt5SjDZuR/mFsAiVN7kk=", "unsafe-inline"))
                 .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:", "https://cdn.jsdelivr.net"))
                 .FormActions(s => s.Self())
                 .FrameAncestors(s => s.Self())
