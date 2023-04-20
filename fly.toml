@@ -13,6 +13,7 @@ processes = []
   Cloudinary__CloudName="dkdr3vfhg"
   Cloudinary__ApiKey="918551767497595"
   Facebook__AppId="585765103500388"
+  Sendgrid__User="GodSandy"
 
 [experimental]
   auto_rollback = true

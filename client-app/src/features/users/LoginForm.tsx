@@ -11,12 +11,12 @@ export default observer(function LoginForm() {
         <Formik
             initialValues={{email: '', password: '', error: null}}
             onSubmit={(values, {setErrors}) => userStore.login(values).catch(error =>
-                setErrors({error: 'Invalid email or password'}))}
+                setErrors({error: error.response.data}))}
         >
             {({handleSubmit, isSubmitting, errors}) => (
                 <Form className="ui form" onSubmit={handleSubmit} autoComplete='off'>
                     <Header as='h2' content='Login to Reactivities' color="teal" textAlign="center" />
-                    <MyTextInput placeholder="Emial" name="email" />
+                    <MyTextInput placeholder="Email" name="email" />
                     <MyTextInput placeholder="Password" name="password" type="password" />
                     <ErrorMessage
                         name="error" render={() => 
